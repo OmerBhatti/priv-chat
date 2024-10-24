@@ -1,0 +1,69 @@
+# Node (Expo) related files
+node_modules/
+npm-debug.log
+yarn-error.log
+*.log
+.expo/
+.expo-shared/
+dist/
+web-build/
+package-lock.json
+yarn.lock
+
+# Expo cache
+.expo/
+.expo-shared/
+
+# Build files
+ios/
+android/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.development
+
+# macOS
+.DS_Store
+
+# Miscellaneous
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python (Django) related files
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.eggs/
+db.sqlite3
+
+# Virtualenv
+.env/
+.venv/
+ENV/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django stuff:
+media/
+staticfiles/
+static/
+*.log
+
+# Pytest
+.pytest_cache/
+
+# Django Channels WebSocket files
+celerybeat-schedule
+celerybeat.pid
+
+# Other
+*.bak
