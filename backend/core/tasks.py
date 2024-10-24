@@ -1,3 +1,4 @@
+"""Tasks for core app."""
 from celery import shared_task
 
 from utils import send_email

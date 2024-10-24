@@ -1,3 +1,4 @@
+"""Views for core API."""
 import random
 
 from django.template import loader
