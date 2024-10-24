@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Generated</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        p {
+            margin: 0;
+        }
+        code {
+            font-size: 25px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: beige;
+            color: black;
+            display: flex;
+            margin: 10px 0px;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verify your account</h1>
+    <h4>Hello {{ full_name }},</h4>
+    <p>
+    To enjoy secure and private messaging with your friends at <b>PrivChat</b>, we need to verify your account.<br/>
+    Please use the One Time Password (OTP) below to verify your account.
+    </p>
+    <code>{{ otp }}</code>
+    <p>If you did not request this, please ignore this email.</p>
+    <br/>
+    <p>Best regards,</p>
+    <p>PrivChat</p>
+</body>
+</html>
