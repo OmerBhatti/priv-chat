@@ -43,6 +43,7 @@ __pycache__/
 *.egg-info/
 *.eggs/
 db.sqlite3
+local_settings.py
 
 # Virtualenv
 .env/
