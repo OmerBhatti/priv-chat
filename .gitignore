@@ -68,3 +68,6 @@ celerybeat.pid
 
 # Other
 *.bak
+
+# Config
+config/

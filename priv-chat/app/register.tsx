@@ -1,8 +1,9 @@
-import { View } from 'react-native';
+import { Alert, ToastAndroid, View } from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { TextInput, Text } from 'react-native-paper';
 import Button from '@/components/Button';
+import { register } from '@/api';
 
 const Register = () => {
 	const router = useRouter();
@@ -16,8 +17,9 @@ const Register = () => {
 	const [error, setError] = useState<string>('');
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-	const handleRegister = () => {
+	const handleRegister = async () => {
 		setError('');
 		if (loginData.firstName === '' || loginData.lastName === '') {
 			setError('First name and last name are required');
@@ -35,7 +37,19 @@ const Register = () => {
 			setError('Passwords do not match');
 			return;
 		}
-		console.log(loginData);
+		try {
+			setIsLoading(true);
+			const response = await register(loginData);
+			if (response?.token) {
+				setIsLoading(false);
+				ToastAndroid.show('Registration successful', ToastAndroid.SHORT);
+				router.navigate('/login');
+			}
+			setIsLoading(false);
+		} catch (error: any) {
+			Alert.alert('Error', error.message);
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -50,6 +64,7 @@ const Register = () => {
 						First Name *
 					</Text>
 					<TextInput
+						disabled={isLoading}
 						value={loginData.firstName}
 						onChangeText={text => {
 							setError('');
@@ -65,6 +80,7 @@ const Register = () => {
 						Last Name *
 					</Text>
 					<TextInput
+						disabled={isLoading}
 						value={loginData.lastName}
 						onChangeText={text => {
 							setError('');
@@ -80,6 +96,7 @@ const Register = () => {
 				Email *
 			</Text>
 			<TextInput
+				disabled={isLoading}
 				value={loginData.email}
 				onChangeText={text => {
 					setError('');
@@ -93,6 +110,7 @@ const Register = () => {
 				Password *
 			</Text>
 			<TextInput
+				disabled={isLoading}
 				right={
 					<TextInput.Icon
 						onPress={() => setShowPassword(!showPassword)}
@@ -113,6 +131,7 @@ const Register = () => {
 				Confirm Password *
 			</Text>
 			<TextInput
+				disabled={isLoading}
 				right={
 					<TextInput.Icon
 						onPress={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -134,8 +153,14 @@ const Register = () => {
 					{error}
 				</Text>
 			)}
-			<Button title="Register" onPress={handleRegister} style={{ marginTop: 20 }} disabled={error !== ''} />
 			<Button
+				title="Register"
+				onPress={handleRegister}
+				style={{ marginTop: 20 }}
+				disabled={error !== '' || isLoading}
+			/>
+			<Button
+				disabled={isLoading}
 				title="Login"
 				onPress={() => {
 					router.navigate('/login');
