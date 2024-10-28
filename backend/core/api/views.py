@@ -27,8 +27,8 @@ def login(request):
     validator = LoginValidator(data=request.data)
     validator.is_valid(raise_exception=True)
 
-    email = request.data["email"]
-    password = request.data["password"]
+    email = validator.validated_data.get("email")
+    password = validator.validated_data.get("password")
 
     user = User.objects.filter(email=email).first()
 
@@ -59,10 +59,10 @@ def register(request):
     validator = RegisterValidator(data=request.data)
     validator.is_valid(raise_exception=True)
 
-    email = request.data["email"]
-    password = request.data["password"]
-    first_name = request.data["first_name"]
-    last_name = request.data["last_name"]
+    email = validator.validated_data.get("email")
+    password = validator.validated_data.get("password")
+    first_name = validator.validated_data.get("first_name")
+    last_name = validator.validated_data.get("last_name")
 
     if User.objects.filter(email=email).exists():
         return Response({"detail": "User already exists"}, status=status.HTTP_409_CONFLICT)
@@ -124,11 +124,13 @@ class UserVerificationView(ListCreateAPIView):
         validator = OTPValidator(data=request.data)
         validator.is_valid(raise_exception=True)
 
+        input_otp = validator.validated_data["otp"]
+
         user = request.user
         key = CACHE_KEYS['otp'].format(user_id=user.id)
         otp = CACHE.get(key)
 
-        if otp != request.data["otp"]:
+        if otp != input_otp:
             return Response({"detail": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
 
         CACHE.delete(key)

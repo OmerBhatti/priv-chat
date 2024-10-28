@@ -42,4 +42,4 @@ class RegisterValidator(ValidationSerializer):
 class OTPValidator(ValidationSerializer):
     """OTP Confirmation validator."""
 
-    otp = serializers.CharField(max_length=8)
+    otp = serializers.IntegerField(min_value=100000, max_value=999999)
