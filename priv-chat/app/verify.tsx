@@ -7,11 +7,13 @@ import { OtpInput } from 'react-native-otp-entry';
 import { verify } from '@/api';
 import { getItem, setItem, STORAGE_KEYS } from '@/utils';
 import { useRouter } from 'expo-router';
+import { useUser } from '@/context/userProvider';
 
 export const Verify = () => {
 	const [verificationCode, setVerificationCode] = useState<string>('');
 	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
+	const { user } = useUser();
 
 	const handleVerification = async () => {
 		try {

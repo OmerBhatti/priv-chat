@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { TextInput, Text } from 'react-native-paper';
 import Button from '@/components/Button';
 import { register } from '@/api';
+import { useUser } from '@/context/userProvider';
 
 const Register = () => {
 	const router = useRouter();
@@ -18,6 +19,7 @@ const Register = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const { user } = useUser();
 
 	const handleRegister = async () => {
 		setError('');

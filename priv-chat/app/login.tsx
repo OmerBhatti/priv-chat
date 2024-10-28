@@ -6,6 +6,7 @@ import Button from '@/components/Button';
 import { useRouter } from 'expo-router';
 import { login, startVerification } from '@/api';
 import { setItem, STORAGE_KEYS } from '@/utils';
+import { useUser } from '@/context/userProvider';
 
 const Login = () => {
 	const router = useRouter();
@@ -16,14 +17,14 @@ const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [error, setError] = useState<string>('');
 	const [isLoading, setIsLoading] = useState(false);
+	const { user } = useUser();
 
 	const handleLogin = async () => {
 		setError('');
 		if (loginData.email === '' || loginData.password === '') {
 			setError('Email and password are required');
 			return;
-		}
-		else if (loginData.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g) === null) {
+		} else if (loginData.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g) === null) {
 			setError('Please enter a valid email');
 			return;
 		}

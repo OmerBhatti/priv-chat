@@ -1,14 +1,17 @@
 import { Text, View } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
+import { useUser } from '@/context/userProvider';
+import { useRouter } from 'expo-router';
 
-export class Chat extends Component {
-	render() {
-		return (
-			<View>
-				<Text>Chat</Text>
-			</View>
-		);
-	}
-}
+export const Chat = () => {
+	const router = useRouter();
+	const { user } = useUser();
+
+	return (
+		<View style={{ padding: 20 }}>
+			<Text>Chat</Text>
+		</View>
+	);
+};
 
 export default Chat;
