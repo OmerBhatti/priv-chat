@@ -11,7 +11,7 @@ export default function RootLayout() {
 					<Stack.Screen name="login" options={{ headerShown: false }} />
 					<Stack.Screen name="register" options={{ headerShown: false }} />
 					<Stack.Screen name="verify" options={{ headerShown: false }} />
-					<Stack.Screen name="chat/index" options={{ headerTitle: 'PrivChat' }} />
+					<Stack.Screen name="chat/index" options={{ headerTitle: 'PrivChat', headerBackVisible: false }} />
 				</Stack>
 			</PaperProvider>
 		</StateProvider>

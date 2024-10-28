@@ -1,9 +1,12 @@
 import { Image, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import Button from '../components/Button';
+import { useUser } from '@/context/userProvider';
 
 export default function Index() {
 	const router = useRouter();
+	const { user } = useUser();
+
 	return (
 		<View
 			style={{

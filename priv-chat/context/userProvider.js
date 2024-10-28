@@ -3,7 +3,7 @@ import { getItem, setItem, STORAGE_KEYS } from '../utils/storage';
 
 const UserContext = createContext();
 
-export const useUser = () => useContext(UserContext);
+export const useUser = () => useContext(UserContext) || {};
 
 export const UserProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
@@ -45,9 +45,18 @@ export const UserProvider = ({ children }) => {
 		setUser(null);
 	};
 
-	if (isLoading) {
-		return null;
-	}
-
-	return <UserContext.Provider value={{ user, login, logout, updateUser }}>{children}</UserContext.Provider>;
+	return isLoading ? (
+		<>{children}</>
+	) : (
+		<UserContext.Provider
+			value={{
+				user,
+				login,
+				logout,
+				updateUser,
+			}}
+		>
+			{children}
+		</UserContext.Provider>
+	);
 };
